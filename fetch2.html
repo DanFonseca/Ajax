@@ -28,7 +28,36 @@
         <button>Salvar</button>
     </form>
     <div id="resultado"></div>
-    <script>
-        // ...
+
+    <script>    
+        document.usuarioForm.onsubmit = async e => {
+            e.preventDefault()
+
+            const form = e.target
+            const data = new FormData(form)
+            data.append('daniel', 'tope')
+
+            const options = {
+                method: 'POST',
+                body: new URLSearchParams(data)
+            }
+
+            const div = document.getElementById('resultado')
+        //     fetch(form.action, options)
+        //         .then(resp => resp.json())
+        //         .then(json => {
+        //             div.innerHTML = JSON.stringify(json)
+        //     }).catch(e => {
+        //         div.innerHTML = e
+        //     })
+        // }
+
+        try{
+            const resp = await fetch(form.action, options)
+            const json =  await resp.json()
+            div.innerHTML = JSON.stringify(json)
+        }catch(e){
+            div.innerHTML = e
+        }
     </script>
 </body>

@@ -14,11 +14,40 @@
        fetch('dados/estados.json')
        .then(resp => resp.json())
        .then(json => {
-        let estados = json.reduce ((html, estado) => 
-               html + `<li>${estado.nome}</li>`, ''
-            )
-        document.body.insertAdjacentHTML('beforeend', `<ul>${estados}</ul>`)
+           let trs = []
+           const table = document.querySelector('.table')
+            json.forEach(elemento => {
+                trs.push (criarTr(elemento))
+           });
+           console.log(trs);
+
+           document.body.insertAdjacentHTML('beforeend', `
+           <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nome</th>
+                    <th>sigla</th>
+                </tr>
+            <thead>
+            ${trs}
+            </table>`)
+
        })
+
+       function criarTr (elemento){
+          let tr
+          function criar(elemento) {
+                tr = 
+                `<tr>
+                        <td>${elemento.id}<td>
+                        <td>${elemento.nome}<td>
+                        <td>${elemento.sigla}<td>
+                 </tr>`
+                return tr
+           }
+           return criar(elemento)
+       }
 
     </script>
 </body>
