@@ -12,6 +12,8 @@
     <h1>Estados</h1>
 
     <script>
-        // ...
+        axios('dados/estados.json').then(resp => {
+           console.log(resp.data);  
+        })
     </script>
 </body>

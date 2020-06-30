@@ -6,7 +6,7 @@ let app = express()
 app.use(express.static('.'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-const porta = 8080
+const porta = 8081
 
 let storage = multer.diskStorage({
     destination: function(req, file, callback){
@@ -33,6 +33,10 @@ app.post('/formulario', (req, res) => {
     ...req.body,
     id: 1
     })
+})
+
+app.get('/parouimpar/:numero', (req, res) => {
+    res.send(req.params.numero % 2 == 0 ? 'par':'impar')
 })
 
 

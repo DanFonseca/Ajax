@@ -12,8 +12,28 @@
     <h1>Axios Get/Post</h1>
     <div id="get"></div>
     <div id="post"></div>
+    <input id="numero" type="text"/>
+    <button id="verificar" type="submit" >Verificar</button>
 
     <script>
-        // ...
+        function calcular (e){
+            let numero = document.getElementById('numero').value 
+            if(numero || numero ==0){   
+                axios.get(`parouimpar/${numero}`)
+                    .then(resp => {
+                        const div = document.getElementById('get')
+                        div.innerHTML = resp.data
+                    })
+                axios.post('/formulario', {daniel:'show'})
+                    .then(resp => {
+                       const div =  document.getElementById('post')
+                       div.innerHTML = JSON.stringify(resp.data)
+                    })
+            }
+        }
+
+        document.getElementById('verificar').onclick = calcular
+    
+        
     </script>
 </body>
